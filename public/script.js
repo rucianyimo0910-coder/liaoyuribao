@@ -229,11 +229,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const now = new Date();
     const dateStr = now.getFullYear() + '年' + 
                    (now.getMonth() + 1) + '月' + 
-                   now.getDate() + '日 ' + 
-                   String(now.getHours()).padStart(2, '0') + ':' + 
-                   String(now.getMinutes()).padStart(2, '0') + ':' + 
-                   String(now.getSeconds()).padStart(2, '0') + '更新';
-    document.getElementById('currentDate').textContent = dateStr;
+                   now.getDate() + '日';
+    document.querySelector('.post-date').textContent = dateStr;
     
     // 导航项点击事件
     document.querySelectorAll('.nav-link').forEach(link => {
@@ -260,12 +257,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 资源项点击事件
-    document.querySelectorAll('.resources-list a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('查看资源:', this.textContent);
+    // 标签点击事件
+    document.querySelectorAll('.tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            console.log('点击标签:', this.textContent);
         });
+    });
+    
+    // 订阅表单提交事件
+    document.querySelector('.subscribe-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        console.log('订阅邮箱:', email);
+        alert('感谢您的订阅！');
     });
 });
 
