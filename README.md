@@ -25,8 +25,11 @@ healtherly-daily-report/
 │   └── script.js           # 交互逻辑
 ├── server.js               # 简易服务器
 ├── start.sh                # 启动脚本
+├── deploy_to_github.sh     # GitHub 部署脚本
+├── GITHUB_SETUP.md         # GitHub 配置说明
 ├── README.md               # 项目说明
-└── DEPLOYMENT.md           # 部署说明
+├── DEPLOYMENT.md           # 部署说明
+└── FINAL_SUMMARY.md        # 项目总结
 ```
 
 ## 功能特色
@@ -55,6 +58,19 @@ node server.js
 cd healtherly-daily-report
 bash start.sh
 ```
+
+## 部署到 GitHub
+
+要将此项目部署到您的 GitHub 账户，请使用以下方法之一：
+
+### 方法一：使用部署脚本
+```bash
+cd healtherly-daily-report
+bash deploy_to_github.sh
+```
+
+### 方法二：手动配置
+请参阅 `GITHUB_SETUP.md` 文件中的详细说明。
 
 ## 技术栈
 
