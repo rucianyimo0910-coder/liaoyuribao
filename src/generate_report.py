@@ -184,51 +184,98 @@ def generate_html_content():
     # 构建HTML片段
     healing_news_html = ""
     for article in healing_news:
+        # 为示例链接提供更有意义的URL
+        url = article['url']
+        if url == "#":
+            # 根据文章主题提供相关的搜索链接
+            if "冥想" in article['title'] or "meditation" in article['title'].lower():
+                url = "https://www.mindful.org/category/meditation/"
+            elif "芳香疗法" in article['title'] or "aromatherapy" in article['title'].lower():
+                url = "https://www.healthline.com/health/aromatherapy-benefits"
+            else:
+                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
+                
         healing_news_html += f"""
         <div class="article">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{article['url']}" class="article-link" target="_blank">了解更多 →</a>
+            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
         </div>
         """
     
     mental_health_html = ""
     for article in mental_health:
+        url = article['url']
+        if url == "#":
+            if "情绪管理" in article['title'] or "emotion" in article['title'].lower():
+                url = "https://www.helpguide.org/articles/emotional-health/emotional-regulation.htm"
+            elif "心理边界" in article['title'] or "boundary" in article['title'].lower():
+                url = "https://www.psychologytoday.com/us/blog/here-there-and-everywhere/201807/how-set-healthy-boundaries"
+            else:
+                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
+                
         mental_health_html += f"""
         <div class="article">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{article['url']}" class="article-link" target="_blank">了解更多 →</a>
+            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
         </div>
         """
     
     natural_therapy_html = ""
     for article in natural_therapy:
+        url = article['url']
+        if url == "#":
+            if "森林浴" in article['title'] or "forest" in article['title'].lower():
+                url = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6318039/"
+            elif "水晶疗法" in article['title'] or "crystal" in article['title'].lower():
+                url = "https://www.healthline.com/health/crystal-healing"
+            else:
+                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
+                
         natural_therapy_html += f"""
         <div class="article">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{article['url']}" class="article-link" target="_blank">了解更多 →</a>
+            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
         </div>
         """
     
     meditation_html = ""
     for article in meditation:
+        url = article['url']
+        if url == "#":
+            if "初学者" in article['title'] or "beginner" in article['title'].lower():
+                url = "https://www.headspace.com/meditation/types/beginners"
+            elif "身体扫描" in article['title'] or "body scan" in article['title'].lower():
+                url = "https://www.mindful.org/body-scan-meditation-step-by-step/"
+            else:
+                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
+                
         meditation_html += f"""
         <div class="article">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{article['url']}" class="article-link" target="_blank">了解更多 →</a>
+            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
         </div>
         """
     
     recommended_html = ""
     for article in recommended:
+        url = article['url']
+        if url == "#":
+            if "当下的力量" in article['title'] or "power of now" in article['title'].lower():
+                url = "https://www.goodreads.com/book/show/4865.The_Power_of_Now"
+            elif "疗愈音乐" in article['title'] or "music" in article['title'].lower():
+                url = "https://open.spotify.com/search/meditation%20music"
+            else:
+                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
+                
         recommended_html += f"""
         <div class="article">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{article['url']}" class="article-link" target="_blank">了解更多 →</a>
+            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
         </div>
         """
     
