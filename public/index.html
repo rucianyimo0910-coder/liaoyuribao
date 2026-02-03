@@ -6,14 +6,12 @@
     <title>身心灵疗愈日报 - Healtherly Daily Report</title>
     <style>
         :root {
-            --primary-color: #4a6cf7;
-            --secondary-color: #6b7280;
-            --background-color: #fafafa;
-            --card-bg: #ffffff;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
+            --bg-color: #fafafa;
+            --text-color: #1f2937;
             --border-color: #e5e7eb;
-            --accent-color: #8b5cf6;
+            --accent-color: #4f46e5;
+            --card-bg: #ffffff;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -24,9 +22,9 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.7;
-            color: var(--text-primary);
-            background-color: var(--background-color);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
             padding: 20px;
             max-width: 800px;
             margin: 0 auto;
@@ -48,11 +46,11 @@
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 10px;
-            color: var(--text-primary);
+            color: var(--text-color);
         }
         
         .date {
-            color: var(--text-secondary);
+            color: #6b7280;
             font-size: 1.1rem;
         }
         
@@ -75,7 +73,7 @@
         .section-title {
             font-size: 1.4rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--text-color);
             margin: 0;
         }
         
@@ -85,7 +83,8 @@
         }
         
         .articles-list {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             gap: 24px;
         }
         
@@ -95,25 +94,45 @@
             border-radius: 8px;
             padding: 20px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
         .article:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
+            text-decoration: none;
         }
         
         .article-title {
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--accent-color);
             margin-bottom: 8px;
             line-height: 1.4;
         }
         
         .article-summary {
-            color: var(--text-secondary);
+            color: #6b7280;
             margin-bottom: 12px;
             line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+        
+        .article-source {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
         }
         
         .article-link {
@@ -139,7 +158,7 @@
             padding: 30px 0;
             margin-top: 40px;
             border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
+            color: #9ca3af;
             font-size: 0.9rem;
         }
         
@@ -166,7 +185,7 @@
     <div class="container">
         <header>
             <h1>身心灵疗愈日报</h1>
-            <div class="date">2026年02月03日 15:40:02更新</div>
+            <div class="date">2026年02月03日 15:49:46更新</div>
         </header>
         
         <div class="content">
@@ -176,17 +195,23 @@
                 </div>
                 <div class="articles-list" id="healing-news">
                     
-        <div class="article">
+        <a href="https://www.mindful.org/category/meditation/" class="article" target="_blank">
             <div class="article-title">冥想对大脑结构的积极影响研究</div>
             <div class="article-summary">最新研究表明，定期冥想可以改变大脑灰质密度，改善情绪调节和认知功能。</div>
-            <a href="https://www.mindful.org/category/meditation/" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">身心灵疗愈</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
-        <div class="article">
+        <a href="https://www.healthline.com/health/aromatherapy-benefits" class="article" target="_blank">
             <div class="article-title">芳香疗法在现代医疗中的应用</div>
             <div class="article-summary">薰衣草和茶树精油在缓解焦虑和促进睡眠方面显示出显著效果。</div>
-            <a href="https://www.healthline.com/health/aromatherapy-benefits" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">身心灵疗愈</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
                 </div>
             </div>
@@ -197,17 +222,23 @@
                 </div>
                 <div class="articles-list" id="mental-health">
                     
-        <div class="article">
+        <a href="https://www.helpguide.org/articles/emotional-health/emotional-regulation.htm" class="article" target="_blank">
             <div class="article-title">情绪管理技巧分享</div>
             <div class="article-summary">学会识别和接纳自己的情绪是情绪管理的第一步。</div>
-            <a href="https://www.helpguide.org/articles/emotional-health/emotional-regulation.htm" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">心理健康</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
-        <div class="article">
+        <a href="https://www.psychologytoday.com/us/blog/here-there-and-everywhere/201807/how-set-healthy-boundaries" class="article" target="_blank">
             <div class="article-title">如何建立健康的心理边界</div>
             <div class="article-summary">设定清晰的个人边界有助于维护心理健康和人际关系。</div>
-            <a href="https://www.psychologytoday.com/us/blog/here-there-and-everywhere/201807/how-set-healthy-boundaries" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">心理健康</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
                 </div>
             </div>
@@ -218,17 +249,23 @@
                 </div>
                 <div class="articles-list" id="natural-therapy">
                     
-        <div class="article">
+        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6318039/" class="article" target="_blank">
             <div class="article-title">森林浴的疗愈功效</div>
             <div class="article-summary">在自然环境中放松有助于降低皮质醇水平，提升免疫力。</div>
-            <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6318039/" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">自然疗法</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
-        <div class="article">
+        <a href="https://www.healthline.com/health/crystal-healing" class="article" target="_blank">
             <div class="article-title">水晶疗法的原理与实践</div>
             <div class="article-summary">不同类型的水晶被认为具有独特的能量频率，可辅助疗愈。</div>
-            <a href="https://www.healthline.com/health/crystal-healing" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">自然疗法</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
                 </div>
             </div>
@@ -239,17 +276,23 @@
                 </div>
                 <div class="articles-list" id="meditation">
                     
-        <div class="article">
+        <a href="https://www.headspace.com/meditation/types/beginners" class="article" target="_blank">
             <div class="article-title">初学者冥想指南</div>
             <div class="article-summary">从5分钟呼吸练习开始，逐步延长冥想时间。</div>
-            <a href="https://www.headspace.com/meditation/types/beginners" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">冥想静心</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
-        <div class="article">
+        <a href="https://www.mindful.org/body-scan-meditation-step-by-step/" class="article" target="_blank">
             <div class="article-title">身体扫描冥想法</div>
             <div class="article-summary">通过关注身体各部位来达到深度放松的效果。</div>
-            <a href="https://www.mindful.org/body-scan-meditation-step-by-step/" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">冥想静心</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
                 </div>
             </div>
@@ -260,17 +303,23 @@
                 </div>
                 <div class="articles-list" id="recommended">
                     
-        <div class="article">
+        <a href="https://www.goodreads.com/book/show/4865.The_Power_of_Now" class="article" target="_blank">
             <div class="article-title">《当下的力量》读书心得</div>
             <div class="article-summary">埃克哈特·托利的经典著作，教你如何活在当下。</div>
-            <a href="https://www.goodreads.com/book/show/4865.The_Power_of_Now" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">推荐阅读</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
-        <div class="article">
+        <a href="https://open.spotify.com/search/meditation%20music" class="article" target="_blank">
             <div class="article-title">最新疗愈音乐推荐</div>
             <div class="article-summary">结合自然声音的冥想音乐，帮助深度放松。</div>
-            <a href="https://open.spotify.com/search/meditation%20music" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">推荐阅读</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         
                 </div>
             </div>

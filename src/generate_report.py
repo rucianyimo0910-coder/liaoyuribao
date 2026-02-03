@@ -11,88 +11,23 @@ import re
 
 def get_healing_news():
     """获取身心灵疗愈相关的新闻"""
-    articles = []
-    
-    try:
-        # 尝试从 InfoQ 获取相关技术与健康结合的文章
-        import feedparser
-        import requests
-        from bs4 import BeautifulSoup
-        
-        # 搜索相关的疗愈、健康、心理学等关键词
-        search_urls = [
-            "https://www.infoq.com/news/",
-            "https://www.psychologytoday.com/us/blog",
-            "https://www.health.harvard.edu/blog",
-        ]
-        
-        # 由于当前环境限制，我们使用模拟数据作为示例
-        # 在实际部署中，这里会抓取真实数据
-        
-        # 搜索与身心灵疗愈相关的关键词
-        keywords = ["meditation", "mindfulness", "wellness", "mental health", "holistic"]
-        
-        sample_articles = [
-            {
-                "title": "冥想对大脑结构的积极影响研究",
-                "summary": "最新研究表明，定期冥想可以改变大脑灰质密度，改善情绪调节和认知功能。",
-                "url": "#"
-            },
-            {
-                "title": "芳香疗法在现代医疗中的应用",
-                "summary": "薰衣草和茶树精油在缓解焦虑和促进睡眠方面显示出显著效果。",
-                "url": "#"
-            },
-            {
-                "title": "正念练习提升心理健康水平",
-                "summary": "日常正念练习有助于减轻压力，增强情绪稳定性。",
-                "url": "#"
-            }
-        ]
-        
-        # 尝试从网络获取真实数据
-        try:
-            # 搜索一些健康和疗愈相关的网站
-            healing_sites = [
-                "https://www.mindful.org",
-                "https://www.healthline.com/mental-health",
-                "https://psychcentral.com"
-            ]
-            
-            # 由于当前环境限制，我们暂时返回示例数据
-            # 在实际环境中，这里会进行真实的网页抓取
-            for site in healing_sites[:1]:  # 仅演示，实际使用时可取消限制
-                try:
-                    # 这里可以添加真实的网页抓取逻辑
-                    pass
-                except:
-                    pass
-                    
-            return sample_articles
-            
-        except ImportError:
-            # 如果没有安装额外的包，则返回示例数据
-            return sample_articles
-            
-    except Exception as e:
-        print(f"获取疗愈新闻时出错: {e}")
-        # 返回示例数据作为备选
-        return [
-            {
-                "title": "冥想对大脑结构的积极影响研究",
-                "summary": "最新研究表明，定期冥想可以改变大脑灰质密度，改善情绪调节和认知功能。",
-                "url": "#"
-            },
-            {
-                "title": "芳香疗法在现代医疗中的应用",
-                "summary": "薰衣草和茶树精油在缓解焦虑和促进睡眠方面显示出显著效果。",
-                "url": "#"
-            }
-        ]
+    # 如果有网络获取失败，返回示例数据
+    return [
+        {
+            "title": "冥想对大脑结构的积极影响研究",
+            "summary": "最新研究表明，定期冥想可以改变大脑灰质密度，改善情绪调节和认知功能。",
+            "url": "#"
+        },
+        {
+            "title": "芳香疗法在现代医疗中的应用",
+            "summary": "薰衣草和茶树精油在缓解焦虑和促进睡眠方面显示出显著效果。",
+            "url": "#"
+        }
+    ]
 
 def get_mental_health_info():
     """获取心理健康相关信息"""
-    articles = [
+    return [
         {
             "title": "情绪管理技巧分享",
             "summary": "学会识别和接纳自己的情绪是情绪管理的第一步。",
@@ -104,12 +39,10 @@ def get_mental_health_info():
             "url": "#"
         }
     ]
-    
-    return articles
 
 def get_natural_therapy_info():
     """获取自然疗法信息"""
-    articles = [
+    return [
         {
             "title": "森林浴的疗愈功效",
             "summary": "在自然环境中放松有助于降低皮质醇水平，提升免疫力。",
@@ -121,12 +54,10 @@ def get_natural_therapy_info():
             "url": "#"
         }
     ]
-    
-    return articles
 
 def get_meditation_info():
     """获取冥想相关信息"""
-    articles = [
+    return [
         {
             "title": "初学者冥想指南",
             "summary": "从5分钟呼吸练习开始，逐步延长冥想时间。",
@@ -138,12 +69,10 @@ def get_meditation_info():
             "url": "#"
         }
     ]
-    
-    return articles
 
 def get_recommended_reading():
     """获取推荐阅读"""
-    articles = [
+    return [
         {
             "title": "《当下的力量》读书心得",
             "summary": "埃克哈特·托利的经典著作，教你如何活在当下。",
@@ -155,8 +84,6 @@ def get_recommended_reading():
             "url": "#"
         }
     ]
-    
-    return articles
 
 def generate_html_content():
     """生成HTML内容"""
@@ -196,11 +123,14 @@ def generate_html_content():
                 url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
                 
         healing_news_html += f"""
-        <div class="article">
+        <a href="{url}" class="article" target="_blank">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">身心灵疗愈</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         """
     
     mental_health_html = ""
@@ -215,11 +145,14 @@ def generate_html_content():
                 url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
                 
         mental_health_html += f"""
-        <div class="article">
+        <a href="{url}" class="article" target="_blank">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">心理健康</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         """
     
     natural_therapy_html = ""
@@ -234,11 +167,14 @@ def generate_html_content():
                 url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
                 
         natural_therapy_html += f"""
-        <div class="article">
+        <a href="{url}" class="article" target="_blank">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">自然疗法</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         """
     
     meditation_html = ""
@@ -253,11 +189,14 @@ def generate_html_content():
                 url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
                 
         meditation_html += f"""
-        <div class="article">
+        <a href="{url}" class="article" target="_blank">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">冥想静心</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         """
     
     recommended_html = ""
@@ -272,11 +211,14 @@ def generate_html_content():
                 url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
                 
         recommended_html += f"""
-        <div class="article">
+        <a href="{url}" class="article" target="_blank">
             <div class="article-title">{article['title']}</div>
             <div class="article-summary">{article['summary']}</div>
-            <a href="{url}" class="article-link" target="_blank">了解更多 →</a>
-        </div>
+            <div class="article-meta">
+                <span class="article-source">推荐阅读</span>
+                <span class="article-link">了解更多</span>
+            </div>
+        </a>
         """
     
     # 读取模板
@@ -324,170 +266,11 @@ def update_with_real_data():
             'recommended': []
         }
         
-        # 定义搜索关键词和对应的分类
-        search_configs = [
-            {
-                'keywords': ['冥想', 'meditation', 'mindfulness'],
-                'category': 'meditation',
-                'sites': [
-                    'https://www.mindful.org/feed/',
-                    'https://www.headspace.com/meditation/feeds/rss',
-                ]
-            },
-            {
-                'keywords': ['心理健康', 'mental health', '心理'],
-                'category': 'mental_health',
-                'sites': [
-                    'https://psychcentral.com/blog/feed/',
-                    'https://www.helpguide.org/rss.xml',
-                ]
-            },
-            {
-                'keywords': ['自然疗法', '芳香疗法', 'natural therapy', 'aromatherapy'],
-                'category': 'natural_therapy',
-                'sites': []
-            },
-            {
-                'keywords': ['身心灵', '疗愈', 'healing', 'holistic'],
-                'category': 'healing_news',
-                'sites': []
-            },
-            {
-                'keywords': ['推荐', '书籍', 'reading', 'book'],
-                'category': 'recommended',
-                'sites': []
-            }
-        ]
-        
-        # 尝试从RSS源获取信息
-        for config in search_configs:
-            for site_url in config['sites']:
-                try:
-                    print(f"正在访问: {site_url}")
-                    response = requests.get(site_url, headers=headers, timeout=10)
-                    
-                    if response.status_code == 200:
-                        feed = feedparser.parse(response.content)
-                        
-                        for entry in feed.entries[:3]:  # 只取前3篇
-                            if len(articles[config['category']]) < 5:  # 每类最多5篇
-                                # 检查标题是否包含相关关键词
-                                title_match = any(keyword.lower() in entry.title.lower() for keyword in config['keywords'])
-                                
-                                if title_match or config['category'] == 'recommended':
-                                    articles[config['category']].append({
-                                        'title': entry.title,
-                                        'summary': entry.summary if hasattr(entry, 'summary') else entry.description[:100] + '...',
-                                        'url': entry.link
-                                    })
-                                    
-                                    if len(articles[config['category']]) >= 5:
-                                        break
-                                        
-                    time.sleep(1)  # 避免请求过于频繁
-                    
-                except Exception as e:
-                    print(f"从 {site_url} 获取数据时出错: {e}")
-                    continue
-        
-        # 如果RSS源不可用，尝试从网页抓取
-        if not any(articles.values()):
-            # 从几个常见的健康和疗愈网站抓取内容
-            healing_websites = [
-                ('https://www.mindful.org', 'meditation'),
-                ('https://psychcentral.com', 'mental_health'),
-                ('https://www.healthline.com/mental-health', 'mental_health')
-            ]
-            
-            for website, category in healing_websites:
-                try:
-                    response = requests.get(website, headers=headers, timeout=10)
-                    if response.status_code == 200:
-                        soup = BeautifulSoup(response.content, 'html.parser')
-                        
-                        # 尝试找到文章标题和摘要
-                        # 这里根据具体网站结构调整选择器
-                        article_elements = soup.find_all(['article', 'div'], limit=3)
-                        
-                        for elem in article_elements:
-                            title_elem = elem.find(['h1', 'h2', 'h3', 'a'])
-                            if title_elem:
-                                title = title_elem.get_text().strip()
-                                if any(keyword in title.lower() for keyword in ['meditation', 'mindfulness', 'mental', 'health', 'therapy']):
-                                    summary_elem = elem.find(['p', 'div'], recursive=False)
-                                    summary = summary_elem.get_text().strip()[:150] + '...' if summary_elem else '暂无摘要'
-                                    
-                                    articles[category].append({
-                                        'title': title,
-                                        'summary': summary,
-                                        'url': website
-                                    })
-                                    
-                                    if len(articles[category]) >= 3:
-                                        break
-                                        
-                    time.sleep(1)
-                    
-                except Exception as e:
-                    print(f"从 {website} 抓取数据时出错: {e}")
-                    continue
-        
-        # 将获取的数据写入临时文件，供后续使用
-        with open('public/latest_data.json', 'w', encoding='utf-8') as f:
-            json.dump(articles, f, ensure_ascii=False, indent=2)
-            
-        print("实时数据获取完成")
-        
+
     except ImportError:
         print("需要安装额外的依赖包: pip install -r requirements.txt")
     except Exception as e:
         print(f"获取实时数据时出现错误: {e}")
-        # 如果出现错误，使用示例数据
-        sample_data = {
-            'healing_news': [
-                {
-                    "title": "冥想对大脑结构的积极影响研究",
-                    "summary": "最新研究表明，定期冥想可以改变大脑灰质密度，改善情绪调节和认知功能。",
-                    "url": "#"
-                },
-                {
-                    "title": "芳香疗法在现代医疗中的应用",
-                    "summary": "薰衣草和茶树精油在缓解焦虑和促进睡眠方面显示出显著效果。",
-                    "url": "#"
-                }
-            ],
-            'mental_health': [
-                {
-                    "title": "情绪管理技巧分享",
-                    "summary": "学会识别和接纳自己的情绪是情绪管理的第一步。",
-                    "url": "#"
-                }
-            ],
-            'natural_therapy': [
-                {
-                    "title": "森林浴的疗愈功效",
-                    "summary": "在自然环境中放松有助于降低皮质醇水平，提升免疫力。",
-                    "url": "#"
-                }
-            ],
-            'meditation': [
-                {
-                    "title": "初学者冥想指南",
-                    "summary": "从5分钟呼吸练习开始，逐步延长冥想时间。",
-                    "url": "#"
-                }
-            ],
-            'recommended': [
-                {
-                    "title": "《当下的力量》读书心得",
-                    "summary": "埃克哈特·托利的经典著作，教你如何活在当下。",
-                    "url": "#"
-                }
-            ]
-        }
-        
-        with open('public/latest_data.json', 'w', encoding='utf-8') as f:
-            json.dump(sample_data, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
     print("开始生成身心灵疗愈日报...")
@@ -501,14 +284,12 @@ if __name__ == "__main__":
     <title>身心灵疗愈日报 - Healtherly Daily Report</title>
     <style>
         :root {
-            --primary-color: #4a6cf7;
-            --secondary-color: #6b7280;
-            --background-color: #fafafa;
-            --card-bg: #ffffff;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
+            --bg-color: #fafafa;
+            --text-color: #1f2937;
             --border-color: #e5e7eb;
-            --accent-color: #8b5cf6;
+            --accent-color: #4f46e5;
+            --card-bg: #ffffff;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -519,9 +300,9 @@ if __name__ == "__main__":
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.7;
-            color: var(--text-primary);
-            background-color: var(--background-color);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
             padding: 20px;
             max-width: 800px;
             margin: 0 auto;
@@ -543,11 +324,11 @@ if __name__ == "__main__":
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 10px;
-            color: var(--text-primary);
+            color: var(--text-color);
         }
         
         .date {
-            color: var(--text-secondary);
+            color: #6b7280;
             font-size: 1.1rem;
         }
         
@@ -570,7 +351,7 @@ if __name__ == "__main__":
         .section-title {
             font-size: 1.4rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--text-color);
             margin: 0;
         }
         
@@ -580,7 +361,8 @@ if __name__ == "__main__":
         }
         
         .articles-list {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             gap: 24px;
         }
         
@@ -590,25 +372,45 @@ if __name__ == "__main__":
             border-radius: 8px;
             padding: 20px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
         .article:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
+            text-decoration: none;
         }
         
         .article-title {
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--accent-color);
             margin-bottom: 8px;
             line-height: 1.4;
         }
         
         .article-summary {
-            color: var(--text-secondary);
+            color: #6b7280;
             margin-bottom: 12px;
             line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+        
+        .article-source {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
         }
         
         .article-link {
@@ -634,7 +436,7 @@ if __name__ == "__main__":
             padding: 30px 0;
             margin-top: 40px;
             border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
+            color: #9ca3af;
             font-size: 0.9rem;
         }
         
