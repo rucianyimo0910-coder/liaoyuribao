@@ -194,36 +194,37 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 随机显示每日寄语
     const randomQuote = dailyQuotes[Math.floor(Math.random() * dailyQuotes.length)];
-    document.querySelector('#dailyQuote').textContent = `"${randomQuote.text}"`;
+    document.getElementById('dailyQuote').textContent = `"${randomQuote.text}"`;
     document.getElementById('quoteAuthor').textContent = `- ${randomQuote.author}`;
     
     // 显示感恩事项（随机选择3项）
     const shuffledGratitude = [...gratitudeItems].sort(() => 0.5 - Math.random());
     const selectedGratitude = shuffledGratitude.slice(0, 3);
-    const gratitudeContainer = document.querySelector('.gratitude-grid');
-    if (gratitudeContainer) {
-        gratitudeContainer.innerHTML = '';
+    const gratitudeList = document.getElementById('gratitudeList');
+    if (gratitudeList) {
+        gratitudeList.innerHTML = '';
         selectedGratitude.forEach(item => {
-            const gratitudeElement = document.createElement('div');
-            gratitudeElement.className = 'gratitude-item';
-            gratitudeElement.innerHTML = `
-                <span class="gratitude-icon">💝</span>
+            const li = document.createElement('li');
+            li.className = 'gratitude-item';
+            li.innerHTML = `
+                <span class="gratitude-emoji">💝</span>
                 <span class="gratitude-text">${item}</span>
             `;
-            gratitudeContainer.appendChild(gratitudeElement);
+            gratitudeList.appendChild(li);
         });
     }
     
-    // 显示往期回顾（最近5项）
-    const archiveContainer = document.querySelector('.archive-grid');
-    if (archiveContainer) {
-        archiveContainer.innerHTML = '';
+    // 显示往期回顾（最近4项）
+    const archiveList = document.getElementById('previousReports');
+    if (archiveList) {
+        archiveList.innerHTML = '';
         previousReports.slice(0, 4).forEach(report => {
-            const archiveElement = document.createElement('a');
-            archiveElement.href = '#';
-            archiveElement.className = 'archive-item';
-            archiveElement.textContent = report;
-            archiveContainer.appendChild(archiveElement);
+            const li = document.createElement('li');
+            li.className = 'archive-item';
+            li.innerHTML = `
+                <a href="#" class="archive-link">${report}</a>
+            `;
+            archiveList.appendChild(li);
         });
     }
     
@@ -235,7 +236,24 @@ document.addEventListener('DOMContentLoaded', function() {
                    String(now.getHours()).padStart(2, '0') + ':' + 
                    String(now.getMinutes()).padStart(2, '0') + ':' + 
                    String(now.getSeconds()).padStart(2, '0') + '更新';
-    document.querySelector('.date-text').textContent = dateStr;
+    document.getElementById('currentDate').textContent = dateStr;
+    
+    // 导航项点击事件
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 移除所有活动状态
+            document.querySelectorAll('.nav-link').forEach(l => {
+                l.classList.remove('active');
+            });
+            
+            // 添加活动状态到当前链接
+            this.classList.add('active');
+            
+            console.log('导航到:', this.querySelector('.nav-text').textContent);
+        });
+    });
 });
 
 // 冥想功能
@@ -253,7 +271,10 @@ function startMeditation() {
                     <div class="circle"></div>
                 </div>
                 <p class="instruction">吸气... 屏息... 呼气...</p>
-                <button onclick="exitMeditation()">结束冥想</button>
+                <button onclick="exitMeditation()" class="btn btn-primary">
+                    <span class="btn-emoji">⏹️</span>
+                    结束冥想
+                </button>
             </div>
         `;
         document.body.appendChild(overlay);
@@ -300,30 +321,32 @@ const meditationStyles = `
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 10000;
     backdrop-filter: blur(10px);
 }
 
 .meditation-modal {
-    background: var(--bg-panel);
+    background: var(--bg-sidebar);
     padding: 2rem;
     border-radius: var(--radius-xl);
     text-align: center;
     max-width: 90%;
     width: 500px;
-    border: var(--border);
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-lg);
     position: relative;
+    border: 2px solid var(--accent-primary);
 }
 
 .meditation-modal h2 {
     margin-bottom: 1rem;
     color: var(--accent-primary);
     font-size: var(--font-xl);
+    font-weight: 600;
 }
 
 .meditation-modal p {
@@ -352,21 +375,14 @@ const meditationStyles = `
     font-style: italic;
     color: var(--text-tertiary);
     margin-bottom: 1.5rem;
+    font-size: var(--font-sm);
 }
 
-.meditation-modal button {
-    background: var(--accent-primary);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    font-weight: 500;
-    transition: var(--transition-fast);
-}
-
-.meditation-modal button:hover {
-    background: var(--accent-secondary);
+.meditation-modal .btn {
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 `;
 
@@ -375,28 +391,23 @@ const styleSheet = document.createElement('style');
 styleSheet.textContent = meditationStyles;
 document.head.appendChild(styleSheet);
 
-// 侧边栏导航交互
-document.querySelectorAll('.nav-link').forEach(link => {
+// 档案项点击事件
+document.querySelectorAll('.archive-link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        // 移除所有活动状态
-        document.querySelectorAll('.nav-link').forEach(l => {
-            l.classList.remove('active');
-        });
-        
-        // 添加活动状态到当前链接
-        this.classList.add('active');
-        
-        // 这里可以添加页面内容切换逻辑
-        console.log('导航到:', this.querySelector('.nav-text').textContent);
+        console.log('查看档案:', this.textContent);
     });
 });
 
-// 档案项点击事件
-document.querySelectorAll('.archive-item').forEach(item => {
-    item.addEventListener('click', function(e) {
+// 平滑滚动效果
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        console.log('查看档案:', this.textContent);
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });

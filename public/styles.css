@@ -1,24 +1,38 @@
 /* 导入Inter字体 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* 基础变量定义 */
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CSS自定义属性 - 主题变量 */
 :root {
-  /* 颜色系统 */
-  --bg-dark: #0a0a0a;
-  --bg-darker: #080808;
-  --bg-panel: #111111;
+  /* 深色主题 */
+  --bg-main: #0a0a0a;
+  --bg-sidebar: #0f0f0f;
   --bg-card: #1a1a1a;
   --bg-card-hover: #222222;
+  
+  /* 文字颜色 */
   --text-primary: #ffffff;
   --text-secondary: #a0a0a0;
   --text-tertiary: #666666;
+  
+  /* 强调色 */
   --accent-primary: #5e7ce0;
   --accent-secondary: #859bff;
-  --success: #5ac8a8;
-  --warning: #ffd464;
-  --danger: #ff6b6b;
+  --accent-success: #5ac8a8;
+  --accent-warning: #ffd464;
+  --accent-danger: #ff6b6b;
   
-  /* 间距系统 */
+  /* 边框和分割线 */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --divider-color: rgba(255, 255, 255, 0.05);
+  
+  /* 间距 */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -26,19 +40,16 @@
   --spacing-xl: 32px;
   --spacing-xxl: 48px;
   
-  /* 圆角系统 */
+  /* 圆角 */
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 24px;
   
-  /* 阴影系统 */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4), 0 5px 10px rgba(0, 0, 0, 0.2);
-  
-  /* 边框 */
-  --border: 1px solid rgba(255, 255, 255, 0.1);
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   
   /* 过渡 */
   --transition-fast: 0.15s ease;
@@ -54,60 +65,59 @@
   --font-2xl: 1.5rem;
   --font-3xl: 1.875rem;
   --font-4xl: 2.25rem;
-}
-
-/* 重置样式 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  
+  /* 侧边栏宽度 */
+  --sidebar-width: 260px;
 }
 
 /* 基础样式 */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg-dark);
+  background: var(--bg-main);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
   min-height: 100vh;
+  overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(94, 124, 224, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(94, 124, 224, 0.03) 0%, transparent 20%);
+    radial-gradient(circle at 15% 25%, rgba(94, 124, 224, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 85% 75%, rgba(94, 124, 224, 0.03) 0%, transparent 20%);
 }
 
-/* 容器布局 */
-.container {
+/* 布局容器 */
+.layout {
   display: flex;
   min-height: 100vh;
-  background: var(--bg-darker);
+  background: var(--bg-main);
 }
 
 /* 侧边栏 */
 .sidebar {
-  width: 280px;
-  background: var(--bg-panel);
-  border-right: var(--border);
-  padding: var(--spacing-xl);
+  width: var(--sidebar-width);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  position: sticky;
-  top: 0;
+  position: fixed;
   height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
   backdrop-filter: blur(10px);
 }
 
-.sidebar-content {
+.sidebar-inner {
+  padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-y: auto;
 }
 
-/* 侧边栏头部 */
-.sidebar-header {
+/* 品牌标识 */
+.brand {
   margin-bottom: var(--spacing-xl);
   padding-bottom: var(--spacing-xl);
-  border-bottom: var(--border);
+  border-bottom: 1px solid var(--divider-color);
 }
 
 .logo {
@@ -117,18 +127,20 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: -0.5px;
 }
 
-.tagline {
+.slogan {
   color: var(--text-secondary);
   font-size: var(--font-sm);
   font-weight: 400;
 }
 
 /* 导航 */
-.navigation {
+.nav {
   margin-bottom: auto;
+  flex-grow: 1;
 }
 
 .nav-list {
@@ -144,12 +156,13 @@ body {
 .nav-link {
   display: flex;
   align-items: center;
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--radius-md);
   color: var(--text-secondary);
   text-decoration: none;
   transition: var(--transition-normal);
   cursor: pointer;
+  font-weight: 500;
 }
 
 .nav-link:hover {
@@ -160,9 +173,10 @@ body {
 .nav-link.active {
   background: var(--bg-card);
   color: var(--accent-primary);
+  font-weight: 600;
 }
 
-.nav-icon {
+.nav-emoji {
   font-size: var(--font-lg);
   margin-right: var(--spacing-md);
   width: 24px;
@@ -170,145 +184,163 @@ body {
 }
 
 .nav-text {
-  font-weight: 500;
+  flex: 1;
 }
 
-/* 侧边栏统计 */
-.sidebar-stats {
-  display: flex;
+/* 统计数据 */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--spacing-md);
   padding-top: var(--spacing-xl);
-  border-top: var(--border);
+  border-top: 1px solid var(--divider-color);
 }
 
-.stat-item {
-  flex: 1;
+.stat {
   text-align: center;
+  padding: var(--spacing-sm) 0;
 }
 
-.stat-value {
-  display: block;
+.stat-number {
   font-size: var(--font-xl);
   font-weight: 700;
   color: var(--accent-primary);
+  margin-bottom: var(--spacing-xs);
 }
 
 .stat-label {
-  display: block;
   font-size: var(--font-xs);
   color: var(--text-tertiary);
 }
 
 /* 主内容区 */
-.main-content {
+.content {
   flex: 1;
+  margin-left: var(--sidebar-width);
   padding: var(--spacing-xl);
-  overflow-y: auto;
-  background: var(--bg-darker);
+  background: var(--bg-main);
 }
 
-/* 主头部 */
-.main-header {
+/* 头部 */
+.header {
   margin-bottom: var(--spacing-xl);
+  text-align: right;
 }
 
-.date-display {
-  text-align: right;
+.date-info {
   padding: var(--spacing-md) 0;
 }
 
-.date-text {
+.date {
   color: var(--text-secondary);
   font-size: var(--font-sm);
+  font-weight: 400;
 }
 
 /* 卡片通用样式 */
-.insight-card, .practice-card, .tip-card, .gratitude-grid, .archive-grid {
+.card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-lg);
-  border: var(--border);
+  border: 1px solid var(--border-color);
   transition: var(--transition-normal);
+  backdrop-filter: blur(10px);
 }
 
-.insight-card:hover, .practice-card:hover, .tip-card:hover {
+.card:hover {
   background: var(--bg-card-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-/* 今日洞察卡片 */
-.daily-insight {
-  margin-bottom: var(--spacing-xl);
-}
-
-.insight-title {
+/* 章节标题 */
+.section-title {
   font-size: var(--font-lg);
   font-weight: 600;
   margin-bottom: var(--spacing-lg);
   color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
-.quote-block {
-  background: rgba(94, 124, 224, 0.1);
+/* 今日语录卡片 */
+.daily-quote {
+  margin-bottom: var(--spacing-xl);
+}
+
+.quote-container {
+  background: rgba(94, 124, 224, 0.05);
   border-left: 3px solid var(--accent-primary);
   padding: var(--spacing-lg) var(--spacing-xl);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
-insight-card blockquote {
+.quote {
   font-size: var(--font-lg);
   font-style: italic;
   margin-bottom: var(--spacing-md);
   line-height: 1.7;
+  color: var(--text-primary);
 }
 
-insight-card cite {
+.quote-author {
   color: var(--text-secondary);
   font-size: var(--font-sm);
   font-style: normal;
   font-weight: 500;
 }
 
-/* 练习卡片 */
-.practice-section {
+/* 冥想卡片 */
+.meditation {
   margin-bottom: var(--spacing-xl);
 }
 
-.practice-header {
+.meditation-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.meditation-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: var(--spacing-md);
 }
 
-.practice-header h3 {
+.meditation-header h3 {
   font-size: var(--font-xl);
   font-weight: 600;
   color: var(--text-primary);
+  margin: 0;
+  flex: 1;
 }
 
-.practice-duration {
+.meditation-meta {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
+  margin-left: var(--spacing-md);
+}
+
+.duration {
   color: var(--text-secondary);
   font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
-.duration-icon {
-  font-size: var(--font-sm);
-}
-
-.practice-actions {
+.meditation-actions {
   display: flex;
   gap: var(--spacing-md);
   margin-top: var(--spacing-lg);
 }
 
 /* 按钮样式 */
-.btn-primary, .btn-secondary {
+.btn {
   padding: var(--spacing-md) var(--spacing-xl);
   border-radius: var(--radius-md);
   border: none;
@@ -319,6 +351,7 @@ insight-card cite {
   align-items: center;
   gap: var(--spacing-sm);
   text-decoration: none;
+  font-family: inherit;
 }
 
 .btn-primary {
@@ -329,12 +362,13 @@ insight-card cite {
 .btn-primary:hover {
   background: var(--accent-secondary);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--text-secondary);
-  border: 1px solid var(--text-tertiary);
+  border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
@@ -343,7 +377,7 @@ insight-card cite {
   border-color: var(--text-secondary);
 }
 
-.btn-icon {
+.btn-emoji {
   font-size: var(--font-sm);
 }
 
@@ -354,49 +388,46 @@ insight-card cite {
 
 .tips-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--spacing-lg);
 }
 
-.tip-card {
+.tip {
   padding: var(--spacing-lg);
 }
 
-.tip-icon {
-  font-size: var(--font-2xl);
+.tip-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
   margin-bottom: var(--spacing-md);
-  display: block;
 }
 
-.tip-card h4 {
+.tip-emoji {
+  font-size: var(--font-2xl);
+}
+
+.tip h3 {
   font-size: var(--font-lg);
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
   color: var(--text-primary);
+  margin: 0;
 }
 
-.tip-card p {
+.tip p {
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
-/* 感恩部分 */
-.gratitude-section {
+/* 感恩日记 */
+.gratitude {
   margin-bottom: var(--spacing-xl);
 }
 
-.section-heading {
-  font-size: var(--font-xl);
-  font-weight: 600;
-  margin-bottom: var(--spacing-lg);
-  color: var(--text-primary);
-}
-
-.gratitude-grid {
+.gratitude-list {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-  padding: var(--spacing-lg);
 }
 
 .gratitude-item {
@@ -412,7 +443,7 @@ insight-card cite {
   background: var(--bg-card-hover);
 }
 
-.gratitude-icon {
+.gratitude-emoji {
   font-size: var(--font-lg);
 }
 
@@ -421,19 +452,22 @@ insight-card cite {
   flex: 1;
 }
 
-/* 归档部分 */
-.archive-section {
+/* 归档 */
+.archive {
   margin-bottom: var(--spacing-xl);
 }
 
-.archive-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--spacing-md);
-  padding: var(--spacing-lg);
+.archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
 .archive-item {
+  list-style: none;
+}
+
+.archive-link {
   display: block;
   padding: var(--spacing-md);
   color: var(--text-secondary);
@@ -442,14 +476,14 @@ insight-card cite {
   transition: var(--transition-fast);
 }
 
-.archive-item:hover {
+.archive-link:hover {
   background: var(--bg-card-hover);
   color: var(--accent-primary);
 }
 
 /* 响应式设计 */
 @media (max-width: 1024px) {
-  .container {
+  .layout {
     flex-direction: column;
   }
   
@@ -458,14 +492,15 @@ insight-card cite {
     height: auto;
     position: static;
     border-right: none;
-    border-bottom: var(--border);
+    border-bottom: 1px solid var(--border-color);
   }
   
-  .sidebar {
-    padding: var(--spacing-lg);
+  .sidebar-inner {
+    height: auto;
   }
   
-  .main-content {
+  .content {
+    margin-left: 0;
     padding: var(--spacing-lg);
   }
   
@@ -473,32 +508,46 @@ insight-card cite {
     grid-template-columns: 1fr;
   }
   
-  .archive-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .main-header {
-    text-align: center;
+  .stats {
+    grid-template-columns: 1fr;
   }
   
-  .practice-header {
+  .meditation-header {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-sm);
   }
   
-  .practice-actions {
+  .meditation-meta {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    text-align: center;
+  }
+  
+  .nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .nav-link {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-sm);
+  }
+  
+  .meditation-actions {
     flex-direction: column;
   }
   
-  .gratitude-grid {
-    flex-direction: column;
+  .card {
+    padding: var(--spacing-lg);
   }
   
-  .archive-grid {
-    grid-template-columns: 1fr;
+  .quote-container {
+    padding: var(--spacing-md);
   }
 }
 
@@ -514,8 +563,18 @@ insight-card cite {
   }
 }
 
-.insight-card, .practice-card, .tip-card {
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.card {
   animation: fadeInUp 0.6s ease-out;
+}
+
+.btn-primary:active {
+  animation: pulse 0.2s ease-in-out;
 }
 
 /* 滚动条样式 */
@@ -525,7 +584,7 @@ insight-card cite {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-darker);
+  background: var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -535,4 +594,17 @@ insight-card cite {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
+}
+
+/* 背景装饰 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 0%, var(--bg-main) 70%);
+  pointer-events: none;
+  z-index: -1;
 }
