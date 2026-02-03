@@ -1,0 +1,426 @@
+/* 导入Inter字体 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* 基础变量定义 */
+:root {
+  --background: #181a1c;
+  --text-color: #fff;
+  --accent-color: #5e7ce0;
+  --secondary-color: #8a9ba8;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 4px 12px rgba(0,0,0,0.15), 0 8px 32px rgba(0,0,0,0.2), 
+            inset 0 0 1px rgba(255,255,255,0.05);
+  --transition-fast: 0.2s;
+  --transition-normal: 0.35s;
+  --transition-slow: 0.5s;
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius: 16px;
+  --sidebar-width: 300px;
+}
+
+/* 重置样式 */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* 基础样式 */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--text-color);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 固定背景层 */
+.fixed-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: opacity var(--transition-slow) var(--ease-smooth);
+  background: var(--background);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+.fixed-bg.active {
+  opacity: 1;
+}
+
+/* 头部样式 */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 24px 3.174603175vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(24, 26, 28, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  background: linear-gradient(135deg, #fff, #ccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  letter-spacing: -0.01em;
+}
+
+/* 主内容区域 */
+.main-content {
+  display: flex;
+  min-height: calc(100vh - 120px);
+  padding-top: 80px;
+  padding-left: var(--sidebar-width);
+}
+
+.daily-report {
+  flex: 1;
+  padding: 40px 3.174603175vw 80px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 侧边栏 */
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - 80px);
+  padding: 24px;
+  overflow-y: auto;
+  z-index: 10;
+  background: rgba(24, 26, 28, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navigation h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.navigation ul {
+  list-style: none;
+}
+
+.nav-item {
+  padding: 12px 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color var(--transition-normal) var(--ease-smooth);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-item:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 报告日期 */
+.report-date {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.date-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  letter-spacing: -0.01em;
+}
+
+/* 报告章节 */
+.report-section {
+  margin-bottom: 40px;
+  padding: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition-normal) var(--ease-smooth),
+              box-shadow var(--transition-normal) var(--ease-smooth);
+}
+
+.report-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 12px 40px rgba(0,0,0,0.25),
+              inset 0 0 1px rgba(255,255,255,0.08);
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+  letter-spacing: -0.02em;
+}
+
+/* 引言卡片 */
+.quote-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.quote-card blockquote {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+
+.quote-card cite {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  font-style: normal;
+}
+
+/* 冥想卡片 */
+.meditation-card {
+  text-align: center;
+}
+
+.meditation-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.meditation-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.meditation-card p {
+  font-size: 0.95rem;
+  color: var(--secondary-color);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(94, 124, 224, 0.15);
+  border: 1px solid rgba(94, 124, 224, 0.3);
+  color: #a3baff;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--ease-smooth);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.play-btn:hover {
+  background: rgba(94, 124, 224, 0.25);
+  border-color: rgba(94, 124, 224, 0.5);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(94, 124, 224, 0.2);
+}
+
+.play-icon {
+  font-size: 0.8rem;
+}
+
+/* 心理调适和正念卡片 */
+.psychology-card h3,
+.mindfulness-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.psychology-card p,
+.mindfulness-card p {
+  font-size: 0.95rem;
+  color: var(--secondary-color);
+  line-height: 1.6;
+}
+
+/* 感恩卡片 */
+.gratitude-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.gratitude-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.gratitude-card li {
+  padding-left: 1.5em;
+  position: relative;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: var(--secondary-color);
+  line-height: 1.6;
+}
+
+.gratitude-card li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+/* 底部 */
+.app-footer {
+  text-align: center;
+  padding: 24px 3.174603175vw 36px;
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 250px;
+  }
+  
+  .main-content {
+    padding-left: 250px;
+  }
+}
+
+@media (max-width: 960px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+  
+  .app-header {
+    padding: 16px 5vw;
+  }
+  
+  .logo {
+    font-size: 1.3rem;
+  }
+  
+  .sidebar {
+    display: none;
+  }
+  
+  .main-content {
+    padding-left: 0;
+    min-height: auto;
+  }
+  
+  .daily-report {
+    padding: 40px 5vw 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 16px 6vw;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .daily-report {
+    padding: 40px 6vw 80px;
+  }
+  
+  .report-section {
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+  }
+  
+  .quote-card blockquote {
+    font-size: 1.1rem;
+  }
+  
+  .app-footer {
+    padding: 20px 6vw 24px;
+    font-size: 0.8rem;
+  }
+}
+
+/* 隐藏元素 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 滚动条样式 */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>身心灵疗愈日报 - 每日正能量</title>
+    <meta name="description" content="每日精选身心灵疗愈内容，包含冥想指导、心理调节技巧、正念练习等，帮助您开启充满正能量的一天">
+    <meta name="author" content="Healtherly Daily Report">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="bg-layer-1" class="fixed-bg active"></div>
+    <div id="bg-layer-2" class="fixed-bg"></div>
+    
+    <header class="app-header">
+        <div class="logo-container">
+            <h1 class="logo">身心灵疗愈日报</h1>
+            <p class="subtitle">每日正能量，滋养身心灵</p>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <section class="daily-report">
+            <div class="report-date">
+                <span class="date-text" id="currentDate"></span>
+            </div>
+            
+            <div class="report-section">
+                <h2 class="section-title">今日疗愈语录</h2>
+                <div class="quote-card">
+                    <blockquote id="dailyQuote">
+                        "宁静致远，心静自然凉。"
+                    </blockquote>
+                    <cite id="quoteAuthor">- 今日心灵寄语</cite>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <h2 class="section-title">冥想引导</h2>
+                <div class="meditation-card">
+                    <div class="meditation-icon">🧘‍♀️</div>
+                    <h3 id="meditationTitle">呼吸觉察练习</h3>
+                    <p id="meditationDescription">通过简单的呼吸觉察，连接当下，平静内心</p>
+                    <button class="play-btn" onclick="startMeditation()">
+                        <span class="play-icon">▶</span>
+                        开始冥想
+                    </button>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <h2 class="section-title">心理调适</h2>
+                <div class="psychology-card">
+                    <h3 id="psychologyTitle">情绪平衡小贴士</h3>
+                    <p id="psychologyContent">当感到焦虑时，尝试将注意力放在身体的感受上，观察而不评判，让情绪自然流淌。</p>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <h2 class="section-title">正念练习</h2>
+                <div class="mindfulness-card">
+                    <h3 id="mindfulnessTitle">日常正念时刻</h3>
+                    <p id="mindfulnessContent">在喝水时，专注于水的温度、口感和吞咽的感觉，将意识带入当下。</p>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <h2 class="section-title">感恩日记</h2>
+                <div class="gratitude-card">
+                    <h3>今日感恩</h3>
+                    <ul id="gratitudeList">
+                        <li>温暖的阳光</li>
+                        <li>朋友的关怀</li>
+                        <li>内心的平静</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <aside class="sidebar">
+            <nav class="navigation">
+                <h3>往期回顾</h3>
+                <ul id="previousReports">
+                    <!-- 动态加载往期报告 -->
+                </ul>
+            </nav>
+        </aside>
+    </main>
+    
+    <footer class="app-footer">
+        <p>🌿 愿每一个今天都是美好的一天 🌿</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

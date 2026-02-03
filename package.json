@@ -1,0 +1,34 @@
+{
+  "name": "healtherly-daily-report",
+  "version": "1.0.0",
+  "description": "身心灵疗愈日报 - 每日正能量内容展示平台",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve ./public",
+    "dev": "npx live-server ./public --port=3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wellness",
+    "mindfulness",
+    "meditation",
+    "mental-health",
+    "daily-report",
+    "healing",
+    "spiritual"
+  ],
+  "author": "Healtherly Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/healtherly/healtherly-daily-report.git"
+  },
+  "bugs": {
+    "url": "https://github.com/healtherly/healtherly-daily-report/issues"
+  },
+  "homepage": "https://github.com/healtherly/healtherly-daily-report#readme"
+}
