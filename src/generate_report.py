@@ -1,535 +1,225 @@
 #!/usr/bin/env python3
 """
-身心灵疗愈行业日报生成器
+身心灵疗愈行业日报生成器 - 适配参考网站设计风格
 """
 import os
 import json
-import requests
+import random
 from datetime import datetime
 from urllib.parse import urljoin
 import re
 
-def get_healing_news():
-    """获取身心灵疗愈相关的新闻"""
-    # 如果有网络获取失败，返回示例数据
-    return [
-        {
-            "title": "冥想对大脑结构的积极影响研究",
-            "summary": "最新研究表明，定期冥想可以改变大脑灰质密度，改善情绪调节和认知功能。",
-            "url": "#"
-        },
-        {
-            "title": "芳香疗法在现代医疗中的应用",
-            "summary": "薰衣草和茶树精油在缓解焦虑和促进睡眠方面显示出显著效果。",
-            "url": "#"
-        }
+def get_daily_quote():
+    """获取每日心灵寄语"""
+    quotes = [
+        "内心的平静是一切幸福的源泉。",
+        "每一天都是重新开始的机会。",
+        "静心冥想，倾听内在的声音。",
+        "感恩当下，拥抱此刻的美好。",
+        "爱自己，是一切治愈的开始。",
+        "呼吸是生命最简单的冥想。",
+        "宁静致远，淡泊明志。",
+        "万物皆有时，顺其自然。",
+        "慈悲是最高级的力量。",
+        "每一次呼吸，都是生命的礼物。"
     ]
-
-def get_mental_health_info():
-    """获取心理健康相关信息"""
-    return [
-        {
-            "title": "情绪管理技巧分享",
-            "summary": "学会识别和接纳自己的情绪是情绪管理的第一步。",
-            "url": "#"
-        },
-        {
-            "title": "如何建立健康的心理边界",
-            "summary": "设定清晰的个人边界有助于维护心理健康和人际关系。",
-            "url": "#"
-        }
+    authors = [
+        "古代智者",
+        "心灵导师",
+        "冥想大师",
+        "禅宗智慧",
+        "道家哲学",
+        "现代心理学",
+        "瑜伽哲学",
+        "佛学经典"
     ]
+    return {
+        "text": random.choice(quotes),
+        "author": random.choice(authors)
+    }
 
-def get_natural_therapy_info():
-    """获取自然疗法信息"""
-    return [
-        {
-            "title": "森林浴的疗愈功效",
-            "summary": "在自然环境中放松有助于降低皮质醇水平，提升免疫力。",
-            "url": "#"
-        },
-        {
-            "title": "水晶疗法的原理与实践",
-            "summary": "不同类型的水晶被认为具有独特的能量频率，可辅助疗愈。",
-            "url": "#"
-        }
+def get_meditation_exercise():
+    """获取冥想练习"""
+    titles = [
+        "呼吸觉察练习",
+        "身体扫描冥想",
+        "慈心冥想",
+        "正念行走",
+        "观息法",
+        "全身放松冥想",
+        "觉知当下冥想",
+        "感恩冥想"
     ]
-
-def get_meditation_info():
-    """获取冥想相关信息"""
-    return [
-        {
-            "title": "初学者冥想指南",
-            "summary": "从5分钟呼吸练习开始，逐步延长冥想时间。",
-            "url": "#"
-        },
-        {
-            "title": "身体扫描冥想法",
-            "summary": "通过关注身体各部位来达到深度放松的效果。",
-            "url": "#"
-        }
+    descriptions = [
+        "通过简单的呼吸觉察，连接当下，平静内心。",
+        "从头到脚逐一关注身体各个部位，释放紧张与压力。",
+        "培养对自己和他人的慈悲心，感受内在的温暖。",
+        "将正念带入每一步行走，感受与大地的连接。",
+        "单纯地观察呼吸的进出，不加任何控制。",
+        "通过渐进式肌肉放松，达到身心合一的平静。",
+        "放下过去与未来的牵挂，全然体验当下这一刻。",
+        "怀着感恩之心，感受生活中的美好与恩赐。"
     ]
+    return {
+        "title": random.choice(titles),
+        "description": random.choice(descriptions)
+    }
 
-def get_recommended_reading():
-    """获取推荐阅读"""
-    return [
-        {
-            "title": "《当下的力量》读书心得",
-            "summary": "埃克哈特·托利的经典著作，教你如何活在当下。",
-            "url": "#"
-        },
-        {
-            "title": "最新疗愈音乐推荐",
-            "summary": "结合自然声音的冥想音乐，帮助深度放松。",
-            "url": "#"
-        }
+def get_psychology_tips():
+    """获取心理调适技巧"""
+    titles = [
+        "情绪平衡小贴士",
+        "压力管理策略",
+        "自我关怀技巧",
+        "焦虑缓解方法",
+        "睡眠改善建议",
+        "人际关系智慧",
+        "自信建立方法",
+        "边界设定技巧"
     ]
+    contents = [
+        "当感到焦虑时，尝试将注意力放在身体的感受上，观察而不评判，让情绪自然流淌。",
+        '学会说"不"，为自己设立健康的界限，减少不必要的压力。',
+        "每天给自己一些独处的时间，做一些让自己愉悦的事情。",
+        "深呼吸练习可以帮助激活副交感神经系统，缓解焦虑情绪。",
+        "建立规律的作息时间，睡前远离电子设备，创造舒适的睡眠环境。",
+        "真诚地表达自己的感受和需求，同时尊重他人的界限。",
+        "每天记录三件值得感激的事情，培养积极的心态。",
+        "定期评估自己的精力和情绪状态，适时调整节奏。"
+    ]
+    return {
+        "title": random.choice(titles),
+        "content": random.choice(contents)
+    }
 
-def generate_html_content():
-    """生成HTML内容"""
-    # 首先确保获取最新数据
-    update_with_real_data()
+def get_mindfulness_practice():
+    """获取正念练习"""
+    titles = [
+        "日常正念时刻",
+        "五感觉察练习",
+        "正念饮食",
+        "情绪正念",
+        "正念聆听",
+        "呼吸正念",
+        "步行正念",
+        "身体正念"
+    ]
+    contents = [
+        "在喝水时，专注于水的温度、口感和吞咽的感觉，将意识带入当下。",
+        "花几分钟时间，依次关注视觉、听觉、嗅觉、味觉、触觉，增强感官觉察力。",
+        "慢慢咀嚼每一口食物，感受味道、质地和香气的变化，享受进食的过程。",
+        "当情绪升起时，不评判地观察它，像天空包容云朵一样包容情绪。",
+        "专心聆听周围的声音，即使是微小的声音，培养专注力和平静心。",
+        "将注意力集中在呼吸上，感受气息进出鼻腔的细微感觉。",
+        "走路时注意脚底与地面接触的感觉，以及身体的运动节奏。",
+        "闭上眼睛，用手触摸不同的物体，专注于触觉感受。"
+    ]
+    return {
+        "title": random.choice(titles),
+        "content": random.choice(contents)
+    }
+
+def get_gratitude_items():
+    """获取感恩事项"""
+    items = [
+        "感谢阳光透过窗户洒在脸上的温暖",
+        "感谢身边朋友的陪伴与支持",
+        "感谢今天遇到的一个微笑",
+        "感谢自己的努力和成长",
+        "感谢大自然的美丽与宁静",
+        "感谢拥有的健康身体",
+        "感谢每一次学习的机会",
+        "感谢内心的平静时刻",
+        "感谢家人的关爱",
+        "感谢今天的小小成就"
+    ]
+    # 随机选择3个项目
+    selected = random.sample(items, min(3, len(items)))
+    return selected
+
+def get_previous_reports():
+    """生成往期回顾内容"""
+    months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+    days = [str(i) for i in range(1, 31)]
     
-    # 尝试从获取的数据中加载内容，如果失败则使用函数获取
-    try:
-        with open('public/latest_data.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        
-        healing_news = data.get('healing_news', get_healing_news())
-        mental_health = data.get('mental_health', get_mental_health_info())
-        natural_therapy = data.get('natural_therapy', get_natural_therapy_info())
-        meditation = data.get('meditation', get_meditation_info())
-        recommended = data.get('recommended', get_recommended_reading())
-    except:
-        # 如果加载失败，使用函数获取默认数据
-        healing_news = get_healing_news()
-        mental_health = get_mental_health_info()
-        natural_therapy = get_natural_therapy_info()
-        meditation = get_meditation_info()
-        recommended = get_recommended_reading()
+    reports = []
+    for _ in range(5):
+        month = random.choice(months)
+        day = random.choice(days)
+        reports.append(f"{month}{day}日 • 内心探索之旅")
     
-    # 构建HTML片段
-    healing_news_html = ""
-    for article in healing_news:
-        # 为示例链接提供更有意义的URL
-        url = article['url']
-        if url == "#":
-            # 根据文章主题提供相关的搜索链接
-            if "冥想" in article['title'] or "meditation" in article['title'].lower():
-                url = "https://www.mindful.org/category/meditation/"
-            elif "芳香疗法" in article['title'] or "aromatherapy" in article['title'].lower():
-                url = "https://www.healthline.com/health/aromatherapy-benefits"
-            else:
-                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
-                
-        healing_news_html += f"""
-        <a href="{url}" class="article" target="_blank">
-            <div class="article-title">{article['title']}</div>
-            <div class="article-summary">{article['summary']}</div>
-            <div class="article-meta">
-                <span class="article-source">身心灵疗愈</span>
-                <span class="article-link">了解更多</span>
-            </div>
-        </a>
-        """
-    
-    mental_health_html = ""
-    for article in mental_health:
-        url = article['url']
-        if url == "#":
-            if "情绪管理" in article['title'] or "emotion" in article['title'].lower():
-                url = "https://www.helpguide.org/articles/emotional-health/emotional-regulation.htm"
-            elif "心理边界" in article['title'] or "boundary" in article['title'].lower():
-                url = "https://www.psychologytoday.com/us/blog/here-there-and-everywhere/201807/how-set-healthy-boundaries"
-            else:
-                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
-                
-        mental_health_html += f"""
-        <a href="{url}" class="article" target="_blank">
-            <div class="article-title">{article['title']}</div>
-            <div class="article-summary">{article['summary']}</div>
-            <div class="article-meta">
-                <span class="article-source">心理健康</span>
-                <span class="article-link">了解更多</span>
-            </div>
-        </a>
-        """
-    
-    natural_therapy_html = ""
-    for article in natural_therapy:
-        url = article['url']
-        if url == "#":
-            if "森林浴" in article['title'] or "forest" in article['title'].lower():
-                url = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6318039/"
-            elif "水晶疗法" in article['title'] or "crystal" in article['title'].lower():
-                url = "https://www.healthline.com/health/crystal-healing"
-            else:
-                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
-                
-        natural_therapy_html += f"""
-        <a href="{url}" class="article" target="_blank">
-            <div class="article-title">{article['title']}</div>
-            <div class="article-summary">{article['summary']}</div>
-            <div class="article-meta">
-                <span class="article-source">自然疗法</span>
-                <span class="article-link">了解更多</span>
-            </div>
-        </a>
-        """
-    
-    meditation_html = ""
-    for article in meditation:
-        url = article['url']
-        if url == "#":
-            if "初学者" in article['title'] or "beginner" in article['title'].lower():
-                url = "https://www.headspace.com/meditation/types/beginners"
-            elif "身体扫描" in article['title'] or "body scan" in article['title'].lower():
-                url = "https://www.mindful.org/body-scan-meditation-step-by-step/"
-            else:
-                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
-                
-        meditation_html += f"""
-        <a href="{url}" class="article" target="_blank">
-            <div class="article-title">{article['title']}</div>
-            <div class="article-summary">{article['summary']}</div>
-            <div class="article-meta">
-                <span class="article-source">冥想静心</span>
-                <span class="article-link">了解更多</span>
-            </div>
-        </a>
-        """
-    
-    recommended_html = ""
-    for article in recommended:
-        url = article['url']
-        if url == "#":
-            if "当下的力量" in article['title'] or "power of now" in article['title'].lower():
-                url = "https://www.goodreads.com/book/show/4865.The_Power_of_Now"
-            elif "疗愈音乐" in article['title'] or "music" in article['title'].lower():
-                url = "https://open.spotify.com/search/meditation%20music"
-            else:
-                url = "https://www.google.com/search?q=" + article['title'].replace(" ", "+")
-                
-        recommended_html += f"""
-        <a href="{url}" class="article" target="_blank">
-            <div class="article-title">{article['title']}</div>
-            <div class="article-summary">{article['summary']}</div>
-            <div class="article-meta">
-                <span class="article-source">推荐阅读</span>
-                <span class="article-link">了解更多</span>
-            </div>
-        </a>
-        """
-    
-    # 读取模板
+    return reports
+
+def update_index_html():
+    """更新index.html文件，保留原有设计结构"""
+    # 读取当前的index.html文件
     with open('public/index.html', 'r', encoding='utf-8') as f:
-        template = f.read()
+        content = f.read()
     
-    # 替换占位符
+    # 获取新的内容
+    quote = get_daily_quote()
+    meditation = get_meditation_exercise()
+    psychology = get_psychology_tips()
+    mindfulness = get_mindfulness_practice()
+    gratitude_items = get_gratitude_items()
+    previous_reports = get_previous_reports()
+    
+    # 更新日期
     today = datetime.now().strftime('%Y年%m月%d日 %H:%M:%S更新')
-    copyright_year = datetime.now().strftime('%Y')
+    content = re.sub(r'<span class="date-text" id="currentDate">[^<]*</span>', 
+                     f'<span class="date-text" id="currentDate">{today}</span>', content)
     
-    html_content = template.replace('[[DATE]]', today)
-    html_content = html_content.replace('[[HEALING_NEWS]]', healing_news_html)
-    html_content = html_content.replace('[[MENTAL_HEALTH]]', mental_health_html)
-    html_content = html_content.replace('[[NATURAL_THERAPY]]', natural_therapy_html)
-    html_content = html_content.replace('[[MEDITATION]]', meditation_html)
-    html_content = html_content.replace('[[RECOMMENDED]]', recommended_html)
-    html_content = html_content.replace('[[COPYRIGHT_YEAR]]', copyright_year)
+    # 更新每日心灵寄语
+    content = re.sub(r'<blockquote id="dailyQuote">[^<]*<span class="quote-text">[^<]*</span>[^<]*</blockquote>',
+                     f'<blockquote id="dailyQuote"><span class="quote-text">{quote["text"]}</span></blockquote>', content)
+    content = re.sub(r'<cite id="quoteAuthor">[^<]*</cite>', 
+                     f'<cite id="quoteAuthor">- {quote["author"]}</cite>', content)
     
-    # 写入最终文件
+    # 更新冥想练习
+    content = re.sub(r'<h3 id="meditationTitle">[^<]*</h3>',
+                     f'<h3 id="meditationTitle">{meditation["title"]}</h3>', content)
+    content = re.sub(r'<p id="meditationDescription">[^<]*</p>',
+                     f'<p id="meditationDescription">{meditation["description"]}</p>', content)
+    
+    # 更新心理调适
+    content = re.sub(r'<h3 id="psychologyTitle">[^<]*</h3>',
+                     f'<h3 id="psychologyTitle">{psychology["title"]}</h3>', content)
+    content = re.sub(r'<p id="psychologyContent">[^<]*</p>',
+                     f'<p id="psychologyContent">{psychology["content"]}</p>', content)
+    
+    # 更新正念练习
+    content = re.sub(r'<h3 id="mindfulnessTitle">[^<]*</h3>',
+                     f'<h3 id="mindfulnessTitle">{mindfulness["title"]}</h3>', content)
+    content = re.sub(r'<p id="mindfulnessContent">[^<]*</p>',
+                     f'<p id="mindfulnessContent">{mindfulness["content"]}</p>', content)
+    
+    # 更新感恩列表
+    gratitude_html = "\n".join([f'                <li class="gratitude-item">• {item}</li>' for item in gratitude_items])
+    content = re.sub(r'<ul id="gratitudeList">.*?</ul>', 
+                     f'<ul id="gratitudeList">\n{gratitude_html}\n            </ul>', content, flags=re.DOTALL)
+    
+    # 更新往期回顾
+    previous_html = "\n".join([f'                <li><a href="#" class="previous-report-link">{report}</a></li>' for report in previous_reports])
+    content = re.sub(r'<ul id="previousReports">.*?</ul>', 
+                     f'<ul id="previousReports">\n{previous_html}\n            </ul>', content, flags=re.DOTALL)
+    
+    # 写回文件
     with open('public/index.html', 'w', encoding='utf-8') as f:
-        f.write(html_content)
+        f.write(content)
     
-    print(f"日报已生成: {today}")
+    print(f"日报已更新: {today}")
+    print(f"包含 {len(gratitude_items)} 项感恩内容")
+    print(f"往期回顾包含 {len(previous_reports)} 条记录")
 
-def update_with_real_data():
-    """尝试从真实数据源获取信息"""
-    print("正在从网络获取最新信息...")
-    
-    try:
-        import feedparser
-        from bs4 import BeautifulSoup
-        import requests
-        import time
-        
-        # 设置请求头，避免被反爬虫机制阻止
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        
-        articles = {
-            'healing_news': [],
-            'mental_health': [],
-            'natural_therapy': [],
-            'meditation': [],
-            'recommended': []
-        }
-        
 
-    except ImportError:
-        print("需要安装额外的依赖包: pip install -r requirements.txt")
-    except Exception as e:
-        print(f"获取实时数据时出现错误: {e}")
-
-if __name__ == "__main__":
+def main():
     print("开始生成身心灵疗愈日报...")
     
-    # 重新创建模板文件（以防被覆盖）
-    template_content = '''<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>身心灵疗愈日报 - Healtherly Daily Report</title>
-    <style>
-        :root {
-            --bg-color: #fafafa;
-            --text-color: #1f2937;
-            --border-color: #e5e7eb;
-            --accent-color: #4f46e5;
-            --card-bg: #ffffff;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-color);
-        }
-        
-        .date {
-            color: #6b7280;
-            font-size: 1.1rem;
-        }
-        
-        .content {
-            margin-bottom: 40px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-color);
-            margin: 0;
-        }
-        
-        .section-emoji {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .articles-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        
-        .article {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .article:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-            text-decoration: none;
-        }
-        
-        .article-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        
-        .article-summary {
-            color: #6b7280;
-            margin-bottom: 12px;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: #9ca3af;
-        }
-        
-        .article-source {
-            background: #f3f4f6;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-        }
-        
-        .article-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .article-link:hover {
-            text-decoration: underline;
-        }
-        
-        .article-link::after {
-            content: "→";
-            margin-left: 5px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-            border-top: 1px solid var(--border-color);
-            color: #9ca3af;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 640px) {
-            body {
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .section-title {
-                font-size: 1.2rem;
-            }
-            
-            .article {
-                padding: 16px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>身心灵疗愈日报</h1>
-            <div class="date">[[DATE]]</div>
-        </header>
-        
-        <div class="content">
-            <div class="section">
-                <div class="section-header">
-                    <h2 class="section-title"><span class="section-emoji">🧘‍♀️</span> 疗愈资讯</h2>
-                </div>
-                <div class="articles-list" id="healing-news">
-                    [[HEALING_NEWS]]
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-header">
-                    <h2 class="section-title"><span class="section-emoji">🧠</span> 心理健康</h2>
-                </div>
-                <div class="articles-list" id="mental-health">
-                    [[MENTAL_HEALTH]]
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-header">
-                    <h2 class="section-title"><span class="section-emoji">🌿</span> 自然疗法</h2>
-                </div>
-                <div class="articles-list" id="natural-therapy">
-                    [[NATURAL_THERAPY]]
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-header">
-                    <h2 class="section-title"><span class="section-emoji">💭</span> 冥想静心</h2>
-                </div>
-                <div class="articles-list" id="meditation">
-                    [[MEDITATION]]
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-header">
-                    <h2 class="section-title"><span class="section-emoji">📚</span> 推荐阅读</h2>
-                </div>
-                <div class="articles-list" id="recommended">
-                    [[RECOMMENDED]]
-                </div>
-            </div>
-        </div>
-        
-        <footer>
-            <p>身心灵疗愈日报 • 每日更新 • [[COPYRIGHT_YEAR]]</p>
-            <p>在赛博空间中耕耘，传递身心灵疗愈的智慧</p>
-        </footer>
-    </div>
-</body>
-</html>'''
-    
-    # 确保public目录存在
-    os.makedirs('public', exist_ok=True)
-    
-    # 写入模板
-    with open('public/index.html', 'w', encoding='utf-8') as f:
-        f.write(template_content)
-    
-    # 生成内容
-    generate_html_content()
-    update_with_real_data()
+    # 更新index.html文件
+    update_index_html()
     
     print("身心灵疗愈日报生成完成！")
+
+
+if __name__ == "__main__":
+    main()
