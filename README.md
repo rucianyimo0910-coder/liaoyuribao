@@ -26,7 +26,11 @@ healtherly-daily-report/
 ├── server.js               # 简易服务器
 ├── start.sh                # 启动脚本
 ├── deploy_to_github.sh     # GitHub 部署脚本
+├── push_to_repo.sh         # 一键推送脚本
+├── setup_and_deploy.sh     # 部署设置脚本
 ├── GITHUB_SETUP.md         # GitHub 配置说明
+├── CREATE_REPO_INSTRUCTIONS.md # 创建仓库说明
+├── COMPLETION_NOTICE.md    # 完成通知
 ├── README.md               # 项目说明
 ├── DEPLOYMENT.md           # 部署说明
 └── FINAL_SUMMARY.md        # 项目总结
@@ -61,16 +65,22 @@ bash start.sh
 
 ## 部署到 GitHub
 
-要将此项目部署到您的 GitHub 账户，请使用以下方法之一：
+要将此项目部署到您的 GitHub 账户，请按以下步骤操作：
 
-### 方法一：使用部署脚本
+### 第一步：在 GitHub 上创建仓库
+请参考 `CREATE_REPO_INSTRUCTIONS.md` 文件中的详细说明，在 GitHub 上创建名为 `healtherly-daily-report` 的仓库。
+
+### 第二步：推送代码
+仓库创建完成后，运行以下命令推送代码：
+
 ```bash
 cd healtherly-daily-report
-bash deploy_to_github.sh
+bash push_to_repo.sh
 ```
 
-### 方法二：手动配置
-请参阅 `GITHUB_SETUP.md` 文件中的详细说明。
+完成部署后，您还可以：
+- 启用 GitHub Pages 以通过 `https://YOUR_USERNAME.github.io/healtherly-daily-report` 访问应用
+- 在仓库设置中配置其他功能
 
 ## 技术栈
 
