@@ -1,0 +1,41 @@
+name: Deploy Daily Report to GitHub Pages
+
+on:
+  schedule:
+    # 每天早上 8 点 (UTC) 运行，即北京时间下午 4 点
+    - cron: '0 8 * * *'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4 feedparser
+
+    - name: Generate daily report
+      run: |
+        python src/generate_report.py
+
+    - name: Setup Node.js (if needed for additional processing)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        publish_branch: gh-pages
+        force_orphan: true
