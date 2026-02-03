@@ -2,103 +2,156 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>身心灵疗愈日报 - 每日正能量</title>
-    <meta name="description" content="每日精选身心灵疗愈内容，包含冥想指导、心理调节技巧、正念练习等，帮助您开启充满正能量的一天">
-    <meta name="author" content="Healtherly Daily Report">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身心灵疗愈日报 - Healtherly Daily Report</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="bg-layer-1" class="fixed-bg active"></div>
-    <div id="bg-layer-2" class="fixed-bg"></div>
-    
-    <header class="app-header">
-        <div class="logo-container">
-            <h1 class="logo">身心灵疗愈日报</h1>
-            <p class="subtitle">每日正能量，滋养身心灵</p>
-        </div>
-    </header>
-    
-    <main class="main-content">
-        <section class="daily-report">
-            <div class="report-date">
-                <span class="date-text" id="currentDate">2026年02月03日 17:34:19更新</span>
-            </div>
-            
-            <div class="report-section">
-                <h2 class="section-title">今日疗愈语录</h2>
-                <div class="quote-card">
-                    <blockquote id="dailyQuote">
-                        "宁静致远，心静自然凉。"
-                    </blockquote>
-                    <cite id="quoteAuthor">- 道家哲学</cite>
-                </div>
-            </div>
-            
-            <div class="report-section">
-                <h2 class="section-title">冥想引导</h2>
-                <div class="meditation-card">
-                    <div class="meditation-icon">🧘‍♀️</div>
-                    <h3 id="meditationTitle">观息法</h3>
-                    <p id="meditationDescription">怀着感恩之心，感受生活中的美好与恩赐。</p>
-                    <button class="play-btn" onclick="startMeditation()">
-                        <span class="play-icon">▶</span>
-                        开始冥想
-                    </button>
-                </div>
-            </div>
-            
-            <div class="report-section">
-                <h2 class="section-title">心理调适</h2>
-                <div class="psychology-card">
-                    <h3 id="psychologyTitle">自我关怀技巧</h3>
-                    <p id="psychologyContent">建立规律的作息时间，睡前远离电子设备，创造舒适的睡眠环境。</p>
-                </div>
-            </div>
-            
-            <div class="report-section">
-                <h2 class="section-title">正念练习</h2>
-                <div class="mindfulness-card">
-                    <h3 id="mindfulnessTitle">五感觉察练习</h3>
-                    <p id="mindfulnessContent">慢慢咀嚼每一口食物，感受味道、质地和香气的变化，享受进食的过程。</p>
-                </div>
-            </div>
-            
-            <div class="report-section">
-                <h2 class="section-title">感恩日记</h2>
-                <div class="gratitude-card">
-                    <h3>今日感恩</h3>
-                    <ul id="gratitudeList">
-                <li class="gratitude-item">• 感谢阳光透过窗户洒在脸上的温暖</li>
-                <li class="gratitude-item">• 感谢拥有的健康身体</li>
-                <li class="gratitude-item">• 感谢今天的小小成就</li>
-            </ul>
-                </div>
-            </div>
-        </section>
-        
+    <div class="container">
         <aside class="sidebar">
-            <nav class="navigation">
-                <h3>往期回顾</h3>
-                <ul id="previousReports">
-                <li><a href="#" class="previous-report-link">11月29日 • 内心探索之旅</a></li>
-                <li><a href="#" class="previous-report-link">10月23日 • 内心探索之旅</a></li>
-                <li><a href="#" class="previous-report-link">12月26日 • 内心探索之旅</a></li>
-                <li><a href="#" class="previous-report-link">1月20日 • 内心探索之旅</a></li>
-                <li><a href="#" class="previous-report-link">3月18日 • 内心探索之旅</a></li>
-            </ul>
-            </nav>
+            <div class="sidebar-content">
+                <header class="sidebar-header">
+                    <h1 class="logo">Healtherly</h1>
+                    <p class="tagline">身心灵疗愈日报</p>
+                </header>
+                
+                <nav class="navigation">
+                    <ul class="nav-list">
+                        <li class="nav-item active">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">🌿</span>
+                                <span class="nav-text">首页</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">🧘</span>
+                                <span class="nav-text">冥想</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">💭</span>
+                                <span class="nav-text">正念</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">🌱</span>
+                                <span class="nav-text">疗愈</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                <span class="nav-text">往期</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">21</span>
+                        <span class="stat-label">持续疗愈</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">89%</span>
+                        <span class="stat-label">满意度</span>
+                    </div>
+                </div>
+            </div>
         </aside>
-    </main>
+        
+        <main class="main-content">
+            <header class="main-header">
+                <div class="date-display">
+                    <span class="date-text" id="currentDate">2026年02月03日 17:37:35更新</span>
+                </div>
+            </header>
+            
+            <section class="daily-insight">
+                <div class="insight-card">
+                    <h2 class="insight-title">今日疗愈洞察</h2>
+                    <div class="quote-block">
+                        <blockquote id="dailyQuote">"宁静致远，心静自然凉。"</blockquote>
+                        <cite id="quoteAuthor">- 冥想大师</cite>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="practice-section">
+                <div class="practice-card">
+                    <div class="practice-header">
+                        <h3 id="meditationTitle">全身放松冥想</h3>
+                        <div class="practice-duration">
+                            <span class="duration-icon">⏱️</span>
+                            <span class="duration-text">5-10分钟</span>
+                        </div>
+                    </div>
+                    <p id="meditationDescription">通过渐进式肌肉放松，达到身心合一的平静。</p>
+                    <div class="practice-actions">
+                        <button class="btn-primary" onclick="startMeditation()">
+                            <span class="btn-icon">▶</span>
+                            开始冥想
+                        </button>
+                        <button class="btn-secondary">
+                            <span class="btn-icon">📖</span>
+                            了解更多
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="wellness-tips">
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">🧠</div>
+                        <h4 id="psychologyTitle">情绪平衡小贴士</h4>
+                        <p id="psychologyContent">每天给自己一些独处的时间，做一些让自己愉悦的事情。</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">🌸</div>
+                        <h4 id="mindfulnessTitle">日常正念时刻</h4>
+                        <p id="mindfulnessContent">专心聆听周围的声音，即使是微小的声音，培养专注力和平静心。</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="gratitude-section">
+                <h3 class="section-heading">感恩日记</h3>
+                <div class="gratitude-grid">
+                    <div class="gratitude-item">
+                        <span class="gratitude-icon">💝</span>
+                        <span class="gratitude-text">感谢阳光透过窗户洒在脸上的温暖</span>
+                    </div>
+                    <div class="gratitude-item">
+                        <span class="gratitude-icon">💝</span>
+                        <span class="gratitude-text">感谢身边朋友的陪伴与支持</span>
+                    </div>
+                    <div class="gratitude-item">
+                        <span class="gratitude-icon">💝</span>
+                        <span class="gratitude-text">感谢今天遇到的一个微笑</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="archive-section">
+                <h3 class="section-heading">往期回顾</h3>
+                <div class="archive-grid">
+                    <a href="#" class="archive-item">1月30日 • 内心平静之道</a>
+                    <a href="#" class="archive-item">1月31日 • 自我关怀实践</a>
+                    <a href="#" class="archive-item">2月1日 • 正念生活</a>
+                    <a href="#" class="archive-item">2月2日 • 情绪管理</a>
+                </div>
+            </section>
+        </main>
+    </div>
     
-    <footer class="app-footer">
-        <p>🌿 愿每一个今天都是美好的一天 🌿</p>
-    </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
