@@ -220,10 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
         archiveList.innerHTML = '';
         previousReports.slice(0, 4).forEach(report => {
             const li = document.createElement('li');
-            li.className = 'archive-item';
-            li.innerHTML = `
-                <a href="#" class="archive-link">${report}</a>
-            `;
+            li.innerHTML = `<a href="#">${report}</a>`;
             archiveList.appendChild(li);
         });
     }
@@ -254,6 +251,22 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('导航到:', this.querySelector('.nav-text').textContent);
         });
     });
+    
+    // 档案项点击事件
+    document.querySelectorAll('.archive-list a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('查看档案:', this.textContent);
+        });
+    });
+    
+    // 资源项点击事件
+    document.querySelectorAll('.resources-list a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('查看资源:', this.textContent);
+        });
+    });
 });
 
 // 冥想功能
@@ -271,7 +284,7 @@ function startMeditation() {
                     <div class="circle"></div>
                 </div>
                 <p class="instruction">吸气... 屏息... 呼气...</p>
-                <button onclick="exitMeditation()" class="btn btn-primary">
+                <button onclick="exitMeditation()" class="btn-primary">
                     <span class="btn-emoji">⏹️</span>
                     结束冥想
                 </button>
@@ -378,7 +391,7 @@ const meditationStyles = `
     font-size: var(--font-sm);
 }
 
-.meditation-modal .btn {
+.meditation-modal .btn-primary {
     margin: 0 auto;
     display: inline-flex;
     justify-content: center;
@@ -391,23 +404,8 @@ const styleSheet = document.createElement('style');
 styleSheet.textContent = meditationStyles;
 document.head.appendChild(styleSheet);
 
-// 档案项点击事件
-document.querySelectorAll('.archive-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        console.log('查看档案:', this.textContent);
-    });
-});
-
-// 平滑滚动效果
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+// 响应式侧边栏切换
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('collapsed');
+}
