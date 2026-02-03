@@ -500,83 +500,160 @@ if __name__ == "__main__":
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>身心灵疗愈日报 - Healtherly Daily Report</title>
     <style>
-        body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #6b7280;
+            --background-color: #fafafa;
+            --card-bg: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --accent-color: #8b5cf6;
         }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-color);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
         }
+        
         header {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
             text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
         }
+        
         h1 {
-            margin: 0;
-            font-size: 2em;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
         }
+        
         .date {
-            font-size: 1.2em;
-            opacity: 0.9;
-            margin-top: 10px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
         }
+        
         .content {
-            padding: 30px;
+            margin-bottom: 40px;
         }
+        
         .section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
         }
-        .section:last-child {
-            border-bottom: none;
-        }
-        .section h2 {
-            color: #667eea;
-            border-left: 4px solid #667eea;
-            padding-left: 15px;
-            margin-top: 0;
-        }
-        .article {
+        
+        .section-header {
+            display: flex;
+            align-items: center;
             margin-bottom: 20px;
-            padding: 15px;
-            background: #f9f9f9;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .section-emoji {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .articles-list {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .article {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            border-left: 3px solid #764ba2;
+            padding: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+        
+        .article:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
         .article-title {
-            font-weight: bold;
-            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
             margin-bottom: 8px;
+            line-height: 1.4;
         }
+        
         .article-summary {
-            color: #666;
-            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
+        
         .article-link {
-            display: inline-block;
-            margin-top: 10px;
-            color: #667eea;
+            color: var(--accent-color);
             text-decoration: none;
-            font-size: 0.9em;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
         }
+        
+        .article-link:hover {
+            text-decoration: underline;
+        }
+        
+        .article-link::after {
+            content: "→";
+            margin-left: 5px;
+        }
+        
         footer {
             text-align: center;
-            padding: 20px;
-            color: #999;
-            font-size: 0.9em;
-            background: #f9f9f9;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .article {
+                padding: 16px;
+            }
         }
     </style>
 </head>
@@ -589,36 +666,46 @@ if __name__ == "__main__":
         
         <div class="content">
             <div class="section">
-                <h2>🧘‍♀️ 疗愈资讯</h2>
-                <div id="healing-news">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="section-emoji">🧘‍♀️</span> 疗愈资讯</h2>
+                </div>
+                <div class="articles-list" id="healing-news">
                     [[HEALING_NEWS]]
                 </div>
             </div>
             
             <div class="section">
-                <h2>🧠 心理健康</h2>
-                <div id="mental-health">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="section-emoji">🧠</span> 心理健康</h2>
+                </div>
+                <div class="articles-list" id="mental-health">
                     [[MENTAL_HEALTH]]
                 </div>
             </div>
             
             <div class="section">
-                <h2>🌿 自然疗法</h2>
-                <div id="natural-therapy">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="section-emoji">🌿</span> 自然疗法</h2>
+                </div>
+                <div class="articles-list" id="natural-therapy">
                     [[NATURAL_THERAPY]]
                 </div>
             </div>
             
             <div class="section">
-                <h2>💭 冥想静心</h2>
-                <div id="meditation">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="section-emoji">💭</span> 冥想静心</h2>
+                </div>
+                <div class="articles-list" id="meditation">
                     [[MEDITATION]]
                 </div>
             </div>
             
             <div class="section">
-                <h2>📚 推荐阅读</h2>
-                <div id="recommended">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="section-emoji">📚</span> 推荐阅读</h2>
+                </div>
+                <div class="articles-list" id="recommended">
                     [[RECOMMENDED]]
                 </div>
             </div>
@@ -626,6 +713,7 @@ if __name__ == "__main__":
         
         <footer>
             <p>身心灵疗愈日报 • 每日更新 • [[COPYRIGHT_YEAR]]</p>
+            <p>在赛博空间中耕耘，传递身心灵疗愈的智慧</p>
         </footer>
     </div>
 </body>
