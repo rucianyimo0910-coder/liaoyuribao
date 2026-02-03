@@ -237,7 +237,7 @@ def generate_html_content():
         template = f.read()
     
     # 替换占位符
-    today = datetime.now().strftime('%Y年%m月%d日')
+    today = datetime.now().strftime('%Y年%m月%d日 %H:%M:%S更新')
     copyright_year = datetime.now().strftime('%Y')
     
     html_content = template.replace('[[DATE]]', today)
